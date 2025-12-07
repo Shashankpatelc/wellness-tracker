@@ -1,6 +1,6 @@
 -- create wellness_tracker database
-CREATE DATABASE IF NOT EXISTS wellness_tracker;
-USE wellness_tracker;
+CREATE DATABASE IF NOT EXISTS wellness_tracker_db;
+USE wellness_tracker_db;
 
 -- create users table
 CREATE TABLE users (
