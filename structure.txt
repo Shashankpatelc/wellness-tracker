@@ -1,0 +1,11 @@
+wellness-tracker/
+├── db_connect.php
+├── register.php
+├── login.php
+├── logout.php
+├── dashboard.php
+├── help.php
+├── style.css
+└── assets/
+    └── js/
+        └── chart.min.js  # For Step 7: Progress & Trends
