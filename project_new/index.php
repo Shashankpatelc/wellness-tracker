@@ -57,7 +57,7 @@ require_once 'php/connect_db.php';
         const modalBody = document.getElementById('modal-body');
 
         function openModal() {
-            authModal.style.display = 'block';
+            authModal.style.display = 'flex';
         }
 
         function closeModal() {
