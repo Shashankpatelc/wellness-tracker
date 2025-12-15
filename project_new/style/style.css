@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8; /* Soft, light background */
     color: #334e68; /* Dark, readable text */
-    line-height: 1.6;
+    line_height: 1.6;
     margin: 0;
     padding: 0;
 }
@@ -92,63 +92,92 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
     background-color: #eef2f6; 
 }
 
-/* Styles for integrated login/register forms on index.php */
-#auth-forms {
-    margin-top: 20px;
+/* Popup Styles from Sample */
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Use flexbox for centering, overriding default display: none */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.popup-content {
+    background: #fff;
+    width: 300px;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    max-width: 400px; /* Limit width for forms */
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center; /* Center content inside the form container */
+    /* margin: 10% auto; -- Removed as flexbox handles centering */
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Added shadow for better appearance */
 }
 
-.auth-form {
-    padding: 15px;
+.close {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888; /* Make close button visible */
 }
 
-.auth-form h2 {
+/* Adjustments for forms within popup */
+.popup-content h2 {
+    text-align: center;
+    margin-top: 0;
     color: #334e68;
-    margin-bottom: 15px;
 }
 
-.auth-form p {
-    margin-bottom: 20px;
+.popup-content p {
+    text-align: center;
     color: #5a7d9a;
 }
 
-.auth-form label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    color: #334e68;
-    font-weight: bold;
-}
-
-.auth-form input[type="text"],
-.auth-form input[type="password"],
-.auth-form input[type="email"] {
-    width: calc(100% - 22px); /* Account for padding and border */
-    padding: 10px;
-    margin-bottom: 15px;
+.popup-content input[type="text"],
+.popup-content input[type="password"],
+.popup-content input[type="email"] {
+    width: calc(100% - 16px); /* Account for padding */
+    padding: 8px;
+    margin: 10px 0;
     border: 1px solid #c9d6e5;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.auth-form input[type="submit"] {
+.popup-content form button[type="submit"] {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    font-size: 1.1em;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #79a6d0; /* Use existing button primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-.auth-form p a {
+.popup-content form button[type="submit"]:hover {
+    background-color: #5587a2;
+}
+
+.popup-content .wrapper {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+.popup-content .wrapper p {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.popup-content .wrapper p a {
     color: #79a6d0;
     text-decoration: none;
 }
 
-.auth-form p a:hover {
+.popup-content .wrapper p a:hover {
     text-decoration: underline;
 }

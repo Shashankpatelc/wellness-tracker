@@ -19,8 +19,8 @@ require_once 'php/connect_db.php';
         <p>Your private, supportive tool for tracking mood and stress.</p>
         
         <div class="auth-buttons">
-            <a href="html/login.html" class="button">Log In</a>
-            <a href="html/register.html" class="button primary">Sign Up</a>
+            <button id="showLoginPopupBtn" class="button">Log In</button>
+            <button id="showRegisterPopupBtn" class="button primary">Sign Up</button>
         </div>
     </div>
     
@@ -37,5 +37,89 @@ require_once 'php/connect_db.php';
             </ul>
         </section>
     </div>
+
+    <!-- The Popup Structure -->
+    <div id="authPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="closePopupBtn">&times;</span>
+            <div id="popup-body">
+                <!-- Login or Register form will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const showLoginPopupBtn = document.getElementById("showLoginPopupBtn");
+        const showRegisterPopupBtn = document.getElementById("showRegisterPopupBtn");
+        const authPopup = document.getElementById("authPopup");
+        const closePopupBtn = document.getElementById("closePopupBtn");
+        const popupBody = document.getElementById("popup-body");
+
+        function openPopup() {
+            authPopup.style.display = "flex"; // Use flex for centering
+        }
+
+        function closePopup() {
+            authPopup.style.display = "none";
+            popupBody.innerHTML = ''; // Clear popup content on close
+        }
+
+        showLoginPopupBtn.onclick = () => {
+            loadFormIntoPopup('login');
+            openPopup();
+        };
+
+        showRegisterPopupBtn.onclick = () => {
+            loadFormIntoPopup('register');
+            openPopup();
+        };
+
+        closePopupBtn.onclick = () => {
+            closePopup();
+        };
+
+        window.onclick = (e) => {
+            if (e.target === authPopup) {
+                closePopup();
+            }
+        };
+
+        function loadFormIntoPopup(formType) {
+            let url = '';
+            if (formType === 'login') {
+                url = 'html/login.html';
+            } else if (formType === 'register') {
+                url = 'html/register.html';
+            }
+
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    popupBody.innerHTML = html;
+                    
+                    // Re-attach event listeners for links inside the loaded forms
+                    const switchToRegisterLink = popupBody.querySelector('#switch-to-register-popup');
+                    const switchToLoginLink = popupBody.querySelector('#switch-to-login-popup');
+
+                    if (switchToRegisterLink) {
+                        switchToRegisterLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            loadFormIntoPopup('register');
+                        });
+                    }
+                    if (switchToLoginLink) {
+                        switchToLoginLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            loadFormIntoPopup('login');
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading form:', error);
+                    popupBody.innerHTML = '<p>Error loading form. Please try again.</p>';
+                });
+        }
+    </script>
+
 </body>
 </html>
