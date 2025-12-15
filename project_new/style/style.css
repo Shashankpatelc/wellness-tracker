@@ -1,8 +1,4 @@
 /* style.css */
-html, body {
-    height: 100%; /* Ensure full height for modal centering */
-}
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8; /* Soft, light background */
@@ -155,89 +151,4 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 
 .auth-form p a:hover {
     text-decoration: underline;
-}
-
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto; /* Removed to use flexbox centering */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more specific, e.g., 500px */
-    max-width: 500px; /* Max width for larger screens */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    position: relative; /* Needed for absolute positioning of close button */
-}
-
-.close-button {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Adjustments for forms loaded into modal */
-.modal-content .wrapper {
-    margin: 0; /* Remove auto margin from wrapper when in modal */
-    box-shadow: none; /* Remove shadow from wrapper when in modal */
-    padding: 0; /* Remove padding from wrapper when in modal */
-}
-
-.modal-content .wrapper h2 {
-    text-align: center;
-    margin-top: 0;
-}
-
-/* Modal Tabs for Login/Register */
-.modal-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #e1e8f0;
-}
-
-.modal-tab {
-    background-color: transparent;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #5a7d9a;
-    transition: color 0.3s, border-bottom 0.3s;
-}
-
-.modal-tab:hover {
-    color: #334e68;
-}
-
-.modal-tab.active {
-    color: #79a6d0;
-    border-bottom: 2px solid #79a6d0;
-    font-weight: bold;
 }

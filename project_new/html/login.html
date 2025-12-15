@@ -1,23 +1,29 @@
-<div class="wrapper">
-    <div class="modal-tabs">
-        <button class="modal-tab active" id="show-login-tab">Login</button>
-        <button class="modal-tab" id="show-register-tab">Sign Up</button>
-    </div>
-    <h2>Login</h2>
-    <p>Please enter your credentials to access your dashboard.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please enter your credentials to access your dashboard.</p>
 
-    <form action="php/login.php" method="post" autocomplete="off">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username" placeholder="username" autocomplete="off" required>
-        </div>    
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" placeholder="password" autocomplete="new-password" required>
-        </div>
-        <div>
-            <input type="submit" value="Login" class="button primary">
-        </div>
-        <p>Don't have an account? <a href="#" id="switch-to-register-modal">Sign up now</a>.</p>
-    </form>
-</div>
+        <form action="../php/login.php" method="post" autocomplete="off">
+            <div>
+                <label>Username</label>
+                <input type="text" name="username" placeholder="username" autocomplete="off" required>
+            </div>    
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" placeholder="password" autocomplete="new-password" required>
+            </div>
+            <div>
+                <input type="submit" value="Login" class="button primary">
+            </div>
+            <p>Don't have an account? <a href="../html/register.html">Sign up now</a>.</p>
+        </form>
+    </div>
+</body>
+</html>
