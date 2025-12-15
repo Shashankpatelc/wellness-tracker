@@ -1,4 +1,8 @@
 /* style.css */
+html, body {
+    height: 100%; /* Ensure full height for modal centering */
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8; /* Soft, light background */
