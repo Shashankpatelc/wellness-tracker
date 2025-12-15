@@ -87,15 +87,16 @@ require_once 'php/connect_db.php';
         function loadFormIntoModal(formType) {
             let url = '';
             if (formType === 'login') {
-                url = 'html/login.html'; // Will recreate this file
+                url = 'html/login.html';
             } else if (formType === 'register') {
-                url = 'html/register.html'; // Will recreate this file
+                url = 'html/register.html';
             }
 
             fetch(url)
                 .then(response => response.text())
                 .then(html => {
                     modalBody.innerHTML = html;
+                    
                     // Re-attach event listeners for links inside the loaded forms
                     const switchToRegisterLink = modalBody.querySelector('#switch-to-register-modal');
                     const switchToLoginLink = modalBody.querySelector('#switch-to-login-modal');
@@ -110,6 +111,21 @@ require_once 'php/connect_db.php';
                         switchToLoginLink.addEventListener('click', (e) => {
                             e.preventDefault();
                             loadFormIntoModal('login');
+                        });
+                    }
+
+                    // Add event listeners for the new modal tabs
+                    const showLoginTabButton = modalBody.querySelector('#show-login-tab');
+                    const showRegisterTabButton = modalBody.querySelector('#show-register-tab');
+
+                    if (showLoginTabButton) {
+                        showLoginTabButton.addEventListener('click', () => {
+                            loadFormIntoModal('login');
+                        });
+                    }
+                    if (showRegisterTabButton) {
+                        showRegisterTabButton.addEventListener('click', () => {
+                            loadFormIntoModal('register');
                         });
                     }
                 })

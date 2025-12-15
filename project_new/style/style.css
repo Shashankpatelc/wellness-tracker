@@ -209,3 +209,31 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
     text-align: center;
     margin-top: 0;
 }
+
+/* Modal Tabs for Login/Register */
+.modal-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e1e8f0;
+}
+
+.modal-tab {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #5a7d9a;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.modal-tab:hover {
+    color: #334e68;
+}
+
+.modal-tab.active {
+    color: #79a6d0;
+    border-bottom: 2px solid #79a6d0;
+    font-weight: bold;
+}
