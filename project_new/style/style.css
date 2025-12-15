@@ -91,3 +91,64 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 .entries-table tbody tr:hover {
     background-color: #eef2f6; 
 }
+
+/* Styles for integrated login/register forms on index.php */
+#auth-forms {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    max-width: 400px; /* Limit width for forms */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Center content inside the form container */
+}
+
+.auth-form {
+    padding: 15px;
+}
+
+.auth-form h2 {
+    color: #334e68;
+    margin-bottom: 15px;
+}
+
+.auth-form p {
+    margin-bottom: 20px;
+    color: #5a7d9a;
+}
+
+.auth-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #334e68;
+    font-weight: bold;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #c9d6e5;
+    border-radius: 4px;
+}
+
+.auth-form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+.auth-form p a {
+    color: #79a6d0;
+    text-decoration: none;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}

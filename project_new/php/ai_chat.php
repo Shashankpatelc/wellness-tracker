@@ -15,19 +15,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
     header('Content-Type: application/json');
     $user_message = $_POST['message'];
 
-    // --- Mock AI Response Logic ---
-    $ai_response = "That's an interesting thought, " . $username . ". Tell me more about it.";
-    
-    if (strpos(strtolower($user_message), 'hello') !== false || strpos(strtolower($user_message), 'hi') !== false) {
-        $ai_response = "Hello there, " . $username . "! How can I help you find some peace today?";
-    } elseif (strpos(strtolower($user_message), 'stress') !== false || strpos(strtolower($user_message), 'anxious') !== false) {
-        $ai_response = "It sounds like you're feeling some stress. Remember to take a deep breath. What's on your mind?";
-    } elseif (strpos(strtolower($user_message), 'mood') !== false || strpos(strtolower($user_message), 'happy') !== false) {
-        $ai_response = "That's wonderful to hear! What made you feel happy today?";
-    } elseif (strpos(strtolower($user_message), 'sad') !== false || strpos(strtolower($user_message), 'down') !== false) {
-        $ai_response = "I'm sorry to hear that you're feeling down. It's okay to feel this way. Would you like to talk about it?";
-    } elseif (strpos(strtolower($user_message), 'thank you') !== false || strpos(strtolower($user_message), 'thanks') !== false) {
-        $ai_response = "You're very welcome, " . $username . "! I'm always here to support you.";
+    // Ollama API Integration
+    $ollama_url = 'http://localhost:11434/api/generate';
+    $model_name = 'llama3:8b'; // Use the model specified by the user
+
+    $data = [
+        'model' => $model_name,
+        'prompt' => $user_message,
+        'stream' => false // We want the full response at once
+    ];
+
+    $options = [
+        'http' => [
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => json_encode($data),
+            'timeout' => 60, // Timeout in seconds
+        ],
+    ];
+
+    $context  = stream_context_create($options);
+    $result = @file_get_contents($ollama_url, false, $context);
+
+    if ($result === FALSE) {
+        $ai_response = "Error: Could not connect to Ollama API or API call failed.";
+        error_log("Ollama API Error: " . error_get_last()['message']);
+    } else {
+        $response_data = json_decode($result, true);
+        if (isset($response_data['response'])) {
+            $ai_response = $response_data['response'];
+        } else {
+            $ai_response = "Error: Unexpected response from Ollama API.";
+            error_log("Ollama API Unexpected Response: " . $result);
+        }
     }
 
     echo json_encode(['response' => $ai_response]);
