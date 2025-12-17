@@ -1,44 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="../style/style.css">
-</head>
-<body>
-    <center><h1>Welcome to the Tracker App</h1></center>
-    <div class="wrapper">
-        <h2>Sign Up</h2>
-        <p>Create an account to begin your tracking journey.</p>
-        
-        <form action="../php/register.php" method="post" autocomplete="off">
+<div class="wrapper">
+    <h2>✨ Start Your Journey</h2>
+    <p>Create an account to begin tracking your wellness</p>
+    
+    <form action="php/register.php" method="post" autocomplete="off">
 
-            <div>
-                <label>Username</label>
-                <input type="text" id="username" name="username" required autocomplete="off" placeholder="username">
-            </div>    
-            
-            <div>
-                <label>Email</label>
-                <input type="email" id="email" name="email" required autocomplete="off" placeholder="example@gmail.com">
-            </div>
-            
-            <div>
-                <label>Password</label>
-                <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Password">
-            </div>
-            
-            <div>
-                <label>Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password" placeholder="Confirm Password">
-            </div>
-            
-            <div>
-                <input type="submit" value="Register" class="button primary">
-            </div>
-            
-            <p>Already have an account? <a href="login.html">Log in here</a>.</p>
-        </form>
-    </div>    
-</body>
-</html>
+        <div>
+            <label>👤 Username</label>
+            <input type="text" id="username" name="username" required autocomplete="off" placeholder="Choose a unique username">
+        </div>    
+        
+        <div>
+            <label>📧 Email</label>
+            <input type="email" id="email" name="email" required autocomplete="off" placeholder="your.email@example.com">
+        </div>
+        
+        <div>
+            <label>🔑 Password</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="Create a strong password">
+        </div>
+        
+        <div>
+            <label>✓ Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password" placeholder="Re-enter your password">
+        </div>
+        
+        <div>
+            <input type="submit" value="Create Account" class="button primary">
+        </div>
+        
+        <p>Already have an account? <a href="#" id="switch-to-login-popup">Log in here</a></p>
+    </form>
+</div>

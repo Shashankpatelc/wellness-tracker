@@ -1,10 +1,7 @@
 <?php
+// php/register.php
 
-$conn = new mysqli("localhost","root","","wellness_tracker_db");
-if($conn->connect_error){
-    die("Connection failed".$conn->connect_error);
-}
-echo "Connected Scussfully";
+require_once 'connect_db.php'; // Use modular connection
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST['username'];
@@ -12,7 +9,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    $stmp = $conn->prepare("SELECT user_id FROM users WHERE username = ? Or email = ?");
+    // Use prepared statement to check existence
+    $stmp = $conn->prepare("SELECT user_id FROM users WHERE username = ? OR email = ?");
     $stmp->bind_param("ss", $username, $email);
     $stmp->execute();
     $stmp->store_result();
@@ -20,6 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if($stmp->num_rows > 0){
         echo "Username or Email already taken.";
         $stmp->close();
+        $conn->close();
         exit();
     }
     $stmp->close();
@@ -30,7 +29,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $stmt->bind_param("sss", $username, $email, $hashed_password);
         
         if($stmt->execute()){
-            echo "Registration successful. You can now <a href='../html/login.html'>log in</a>.";
+            // Redirect back to the login page
+            echo "Registration successful. You can now <a href='/project1/index.php'>log in</a>."; 
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -40,4 +40,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "Passwords do not match.";
     }
 }
+
+$conn->close();
 ?>

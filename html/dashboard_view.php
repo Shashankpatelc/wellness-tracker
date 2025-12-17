@@ -21,7 +21,10 @@
             <a href="logout.php" class="button">Sign Out</a>
             <div class="dark-mode-toggle">
                 <label for="dark-mode-switch">Dark Mode</label>
-                <input type="checkbox" id="dark-mode-switch">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
     </div>
@@ -164,22 +167,19 @@
 <script>
     // Dark Mode Toggle
     const darkModeSwitch = document.getElementById('dark-mode-switch');
-    const body = document.body;
+    const htmlElement = document.documentElement;
 
     // Check for saved dark mode preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
         darkModeSwitch.checked = true;
     }
 
     darkModeSwitch.addEventListener('change', () => {
-        if (darkModeSwitch.checked) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-        }
+        const theme = darkModeSwitch.checked ? 'dark' : 'light';
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
     });
 </script>
 </body>

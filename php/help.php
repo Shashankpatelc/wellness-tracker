@@ -59,6 +59,13 @@ mysqli_close($conn);
         <p>If you are in crisis, please use the contact resources below. You are not alone.</p>
         <div class="auth-buttons">
             <a href="<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) ? 'dashboard.php' : '../index.php'; ?>" class="button primary">Back to App</a>
+            <div class="dark-mode-toggle">
+                <label for="dark-mode-switch">Dark Mode</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
     </div>
     
@@ -118,10 +125,22 @@ mysqli_close($conn);
     </div>
 <script>
     // Dark Mode Toggle
-    const body = document.body;
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
+    const htmlElement = document.documentElement;
+    const darkModeSwitch = document.getElementById('dark-mode-switch');
+    
+    // Set initial theme from localStorage
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        darkModeSwitch.checked = true;
     }
+    
+    // Listen for dark mode toggle changes
+    darkModeSwitch.addEventListener('change', () => {
+        const theme = darkModeSwitch.checked ? 'dark' : 'light';
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    });
 </script>
 </body>
 </html>

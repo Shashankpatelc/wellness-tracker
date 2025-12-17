@@ -1,36 +1,43 @@
-# Mental health support and stress tracking website
+# Wellness Tracker
 
-CalmTrack is a small, static single-page app that helps you log stress levels, take short notes, and view your stress trend over time. Data is stored locally in your browser's `localStorage` (no server, no accounts).
+A web application for tracking mood and stress levels to promote mental well-being.
 
-Features
-- Log stress level (0–10) with mood and optional notes.
-- View a line chart of stress levels over time (powered by Chart.js CDN).
-- Export your logs as CSV and clear all local data.
-- Quick links to mental health resources and crisis contacts.
+## Description
 
-Files added
-- `index.html` — single-page UI (form, chart, entries, resources).
-- `styles.css` — styling and responsive layout.
-- `app.js` — main JavaScript: localStorage persistence, rendering, export.
+Wellness Tracker is a private and supportive tool that allows users to monitor their mood and stress levels over time. Users can register for an account, log in, and record their daily feelings. The application provides a visual representation of the data in a chart, helping users to identify patterns and trends in their well-being.
 
-How to run
-1. Open the project folder and open `index.html` in a browser (double-click or drag into the browser). No server required for local use.
-2. Add entries using the "Log Stress" form. Entries are saved to your browser.
-3. Use "Export CSV" to save your logs or "Clear All Entries" to remove local data.
+## Features
 
-Notes and limitations
-- This is a demo/static site intended for personal tracking and exploration. It is NOT a replacement for professional mental health services.
-- If you're in crisis, contact local emergency services or your local crisis line (e.g., 988 in the United States).
+- **User Authentication:** Secure user registration and login system.
+- **Mood and Stress Tracking:** Users can log their daily mood and stress scores (on a scale of 0-10) and add optional notes.
+- **Data Visualization:** A line chart displays the user's mood and stress trends over the last 7 days.
+- **Data Persistence:** All user data is securely stored in a database.
+- **Coping Resources:** The application includes a page with quick access to coping mechanisms and crisis contact information.
 
-Next steps you might want
-- Add server-side storage (authenticated) to sync across devices.
-- Add charts by mood, weekly averages, or reminders/notifications.
-- Add more accessibility checks and i18n/localization.
+## Technology Stack
 
-License
-This repository is provided as-is for personal use and prototyping.
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** PHP
+- **Database:** MySQL / MariaDB
+- **Charting Library:** Chart.js
 
----
-Created by project scaffolding script.
-# Mental health support and stress tracking website
-# project1
+## How to Run
+
+1.  **Database Setup:**
+    *   Create a new database named `wellness_tracker_db`.
+    *   Import the `database/create_table.sql` file to create the necessary tables and populate the `coping_resources` table.
+
+2.  **Database Connection:**
+    *   Update the database connection credentials in `php/connect_db.php` to match your local environment.
+
+3.  **Web Server:**
+    *   Deploy the project files to a web server that supports PHP (e.g., Apache, Nginx).
+    *   Access the project through the web server's URL.
+
+## Database Schema
+
+The database consists of three tables:
+
+-   `users`: Stores user information, including username, email, and hashed password.
+-   `mood_entries`: Stores the daily mood and stress entries for each user.
+-   `coping_resources`: Stores information about coping mechanisms and crisis contacts.

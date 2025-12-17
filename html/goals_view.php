@@ -13,6 +13,13 @@
         <div class="auth-buttons">
             <a href="dashboard.php" class="button">Dashboard</a>
             <a href="logout.php" class="button">Sign Out</a>
+            <div class="dark-mode-toggle">
+                <label for="dark-mode-switch">Dark Mode</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
     </div>
 
@@ -66,25 +73,22 @@
     </div>
 <script>
     // Dark Mode Toggle
+    const htmlElement = document.documentElement;
     const darkModeSwitch = document.getElementById('dark-mode-switch');
-    const body = document.body;
-
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        if(darkModeSwitch) darkModeSwitch.checked = true;
+    
+    // Set initial theme from localStorage
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        darkModeSwitch.checked = true;
     }
-
-    if(darkModeSwitch){
-        darkModeSwitch.addEventListener('change', () => {
-            if (darkModeSwitch.checked) {
-                body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        });
-    }
+    
+    // Listen for dark mode toggle changes
+    darkModeSwitch.addEventListener('change', () => {
+        const theme = darkModeSwitch.checked ? 'dark' : 'light';
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    });
 </script>
 </body>
 </html>

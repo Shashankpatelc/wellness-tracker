@@ -1,0 +1,342 @@
+/* ===== DARK MODE STYLES ===== */
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --primary-color: #818cf8;
+    --primary-dark: #a78bfa;
+    --primary-light: #c4b5fd;
+    --success-color: #34d399;
+    --success-dark: #10b981;
+    --warning-color: #fbbf24;
+    --danger-color: #f87171;
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --text-primary: #f3f4f6;
+    --text-secondary: #d1d5db;
+    --border-color: #374151;
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Apply dark mode to body */
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .header {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+[data-theme="dark"] .container,
+[data-theme="dark"] .wrapper {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] input[type="password"]:focus,
+[data-theme="dark"] input[type="email"]:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+    background: var(--bg-primary);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .entries-table th {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .entries-table td {
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .entries-table tbody tr:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="dark"] .feature-card {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .popup-content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .close {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .alert {
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: var(--success-color);
+    color: var(--success-color);
+}
+
+[data-theme="dark"] .journal-prompt {
+    background: rgba(99, 102, 241, 0.15);
+    border-left-color: var(--primary-color);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] a {
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .button,
+[data-theme="dark"] input[type="submit"] {
+    background: var(--primary-color);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .button:hover,
+[data-theme="dark"] input[type="submit"]:hover {
+    background: var(--primary-dark);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .button.primary,
+[data-theme="dark"] input[type="submit"].primary {
+    background: linear-gradient(135deg, var(--success-color) 0%, var(--success-dark) 100%);
+    color: #111827;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .button.primary:hover,
+[data-theme="dark"] input[type="submit"].primary:hover {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #111827;
+}
+
+[data-theme="dark"] .chat-display {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .message.ai-message p {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .message.user-message p {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .message-sender {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .message.user-message .message-sender {
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .message.ai-message .message-sender {
+    color: var(--success-color);
+}
+
+[data-theme="dark"] .chat-input input[type="text"] {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .chat-input input[type="text"]:focus {
+    border-color: var(--primary-color);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+[data-theme="dark"] .wellness-info {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .wellness-info h3 {
+    color: white;
+}
+
+[data-theme="dark"] .stat-box {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .stat-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .stat-value {
+    color: white;
+}
+
+[data-theme="dark"] .how-it-works {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--border-color);
+}
+
+/* ===== DARK MODE TOGGLE SWITCH ===== */
+
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.dark-mode-toggle label {
+    margin: 0;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+/* Toggle Switch Styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    margin: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 32px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider:before {
+    position: absolute;
+    content: "☀️";
+    height: 26px;
+    width: 26px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+input:checked + .slider {
+    background-color: #4f46e5;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+}
+
+input:checked + .slider:before {
+    transform: translateX(28px);
+    content: "🌙";
+}
+
+/* Hover effect */
+.slider:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+input:checked + .slider:hover {
+    box-shadow: 0 2px 12px rgba(79, 70, 229, 0.6);
+}
+
+/* Active/focus state */
+.toggle-switch input:focus + .slider {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+input:checked + .slider:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 2px 8px rgba(79, 70, 229, 0.4);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .dark-mode-toggle {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .dark-mode-toggle label {
+        font-size: 0.9rem;
+    }
+
+    .toggle-switch {
+        width: 52px;
+        height: 28px;
+    }
+
+    .slider:before {
+        height: 22px;
+        width: 22px;
+        left: 3px;
+        bottom: 3px;
+        font-size: 12px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+}
+
+/* Print styles - disable dark mode in print */
+@media print {
+    [data-theme="dark"] {
+        --bg-primary: #f9fafb;
+        --bg-secondary: #ffffff;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+    }
+
+    .dark-mode-toggle {
+        display: none;
+    }
+}
