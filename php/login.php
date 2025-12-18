@@ -33,7 +33,7 @@ if($stmt->num_rows == 1){
         $_SESSION["username"] = $fetched_username;
         
         // Redirect to the Dashboard CONTROLLER in the php/ folder
-        header("location: /project1/php/dashboard.php"); 
+        header("location: /wellness-tracker/php/dashboard.php"); 
         exit;
     } else {
         echo "Invalid username or password."; 
