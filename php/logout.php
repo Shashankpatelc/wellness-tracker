@@ -20,6 +20,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirect to the index page
-header("location: /project1/index.php");
+header("location: /wellness-tracker/index.php");
 exit;
 ?>

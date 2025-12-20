@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         if($stmt->execute()){
             // Redirect back to the login page
-            echo "Registration successful. You can now <a href='/project1/index.php'>log in</a>."; 
+            echo "Registration successful. You can now <a href='/wellness-tracker/index.php'>log in</a>."; 
         } else {
             echo "Error: " . $stmt->error;
         }
