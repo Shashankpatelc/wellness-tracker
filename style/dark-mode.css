@@ -270,12 +270,12 @@
     font-size: 14px;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #4f46e5;
     box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(28px);
     content: "🌙";
 }
@@ -285,16 +285,16 @@ input:checked + .slider:before {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-input:checked + .slider:hover {
+input:checked+.slider:hover {
     box-shadow: 0 2px 12px rgba(79, 70, 229, 0.6);
 }
 
 /* Active/focus state */
-.toggle-switch input:focus + .slider {
+.toggle-switch input:focus+.slider {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-input:checked + .slider:focus {
+input:checked+.slider:focus {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 2px 8px rgba(79, 70, 229, 0.4);
 }
 
@@ -322,7 +322,7 @@ input:checked + .slider:focus {
         font-size: 12px;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
         transform: translateX(24px);
     }
 }
@@ -339,4 +339,25 @@ input:checked + .slider:focus {
     .dark-mode-toggle {
         display: none;
     }
+}
+
+/* Dark mode styles for profile dropdown */
+[data-theme="dark"] .profile-dropdown-menu {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .profile-dropdown-menu a {
+    color: var(--text-primary);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .profile-dropdown-menu a:hover {
+    background: var(--bg-primary);
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .profile-dropdown-menu a.danger:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger-color);
 }

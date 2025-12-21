@@ -59,6 +59,26 @@ mysqli_close($conn);
         <p>If you are in crisis, please use the contact resources below. You are not alone.</p>
         <div class="auth-buttons">
             <a href="<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) ? 'dashboard.php' : '../index.php'; ?>" class="button primary">Back to App</a>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                <div class="profile-dropdown">
+                    <button class="profile-dropdown-btn" id="profileDropdownBtn">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <span>Profile</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                        <a href="profile.php">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> View Profile
+                        </a>
+                        <a href="profile.php#edit">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Information
+                        </a>
+                        <a href="logout.php" class="danger">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out
+                        </a>
+                    </div>
+                </div>
+            <?php endif; ?>
             <div class="dark-mode-toggle">
                 <label for="dark-mode-switch">Dark Mode</label>
                 <label class="toggle-switch">
@@ -141,6 +161,24 @@ mysqli_close($conn);
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     });
+    
+    // Profile Dropdown Menu
+    const profileDropdownBtn = document.getElementById('profileDropdownBtn');
+    const profileDropdown = profileDropdownBtn?.parentElement;
+    
+    if (profileDropdownBtn && profileDropdown) {
+        profileDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+    }
 </script>
 </body>
 </html>
