@@ -26,6 +26,11 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="profile-dropdown-menu" id="profileDropdownMenu">
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <a href="../php/admin/dashboard.php">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Admin Panel
+                        </a>
+                    <?php endif; ?>
                     <a href="profile.php">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> View Profile
                     </a>
