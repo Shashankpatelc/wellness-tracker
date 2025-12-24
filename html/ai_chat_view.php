@@ -72,8 +72,10 @@
             </div>
             <div class="chat-input">
                 <input type="text" id="user-message" placeholder="Type your message here...">
+                <button id="voice-button" class="button voice-btn" title="Click to start voice input">🎤</button>
                 <button id="send-button" class="button primary">Send</button>
             </div>
+            <div id="voice-status" class="voice-status"></div>
         </section>
     </div>
 <script>
@@ -114,9 +116,32 @@
     }
 </script>
 <script>
+    // Initialize Speech Recognition API with better browser detection
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isListening = false;
+    let isSupported = false;
+
+    // Initialize recognition object if API is available
+    try {
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            isSupported = true;
+            console.log('✅ Speech Recognition API is supported');
+        }
+    } catch (error) {
+        console.warn('⚠️ Speech Recognition API error:', error);
+        isSupported = false;
+    }
+
     const chatDisplay = document.getElementById('chat-display');
     const userMessageInput = document.getElementById('user-message');
     const sendButton = document.getElementById('send-button');
+    const voiceButton = document.getElementById('voice-button');
+    const voiceStatus = document.getElementById('voice-status');
 
     sendButton.addEventListener('click', sendMessage);
     userMessageInput.addEventListener('keypress', function (e) {
@@ -124,6 +149,98 @@
             sendMessage();
         }
     });
+
+    // Voice Input Handler - Enable if supported
+    if (voiceButton) {
+        if (isSupported && recognition) {
+            // Full voice feature enabled
+            voiceButton.disabled = false;
+            voiceButton.style.opacity = '1';
+            voiceButton.style.cursor = 'pointer';
+            
+            voiceButton.addEventListener('click', function () {
+                if (isListening) {
+                    recognition.stop();
+                    isListening = false;
+                    voiceButton.classList.remove('listening');
+                    voiceStatus.textContent = '';
+                } else {
+                    // Clear any previous input for new recording
+                    userMessageInput.value = '';
+                    try {
+                        recognition.start();
+                        isListening = true;
+                        voiceButton.classList.add('listening');
+                        voiceStatus.textContent = '🎤 Listening...';
+                    } catch (error) {
+                        console.warn('⚠️ Could not start recognition:', error);
+                        voiceStatus.textContent = '❌ Could not start recording. Already recording?';
+                        setTimeout(() => {
+                            voiceStatus.textContent = '';
+                        }, 3000);
+                    }
+                }
+            });
+
+            recognition.onstart = function () {
+                isListening = true;
+                voiceButton.classList.add('listening');
+                voiceStatus.textContent = '🎤 Listening...';
+            };
+
+            recognition.onresult = function (event) {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript + ' ';
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+
+                // Display interim results (what user is saying)
+                if (interimTranscript) {
+                    userMessageInput.value = finalTranscript + interimTranscript;
+                    userMessageInput.style.fontStyle = 'italic';
+                }
+
+                // When speech is recognized, update the input field
+                if (finalTranscript) {
+                    userMessageInput.value = finalTranscript;
+                    userMessageInput.style.fontStyle = 'normal';
+                }
+            };
+
+            recognition.onerror = function (event) {
+                voiceStatus.textContent = '❌ Error: ' + event.error;
+                voiceButton.classList.remove('listening');
+                isListening = false;
+
+                // Auto-clear error message after 3 seconds
+                setTimeout(() => {
+                    voiceStatus.textContent = '';
+                }, 3000);
+            };
+
+            recognition.onend = function () {
+                isListening = false;
+                voiceButton.classList.remove('listening');
+                voiceStatus.textContent = '';
+                userMessageInput.style.fontStyle = 'normal';
+            };
+        } else {
+            // Speech Recognition not supported - disable gracefully
+            console.warn('⚠️ Speech Recognition API not supported in this browser');
+            voiceButton.disabled = true;
+            voiceButton.title = 'Speech Recognition not supported in your browser. Please use typing instead.';
+            voiceButton.style.opacity = '0.5';
+            voiceButton.style.cursor = 'not-allowed';
+        }
+    }
 
     function sendMessage() {
         const message = userMessageInput.value.trim();
