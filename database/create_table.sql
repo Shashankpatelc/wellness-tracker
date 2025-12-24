@@ -38,8 +38,8 @@ CREATE TABLE coping_resources (
 INSERT INTO coping_resources (category, title, content, sort_order) VALUES
 ('Grounding', '5-4-3-2-1 Technique', 'Focus on 5 things you can see, 4 things you can feel, 3 things you can hear, 2 things you can smell, and 1 thing you can taste. This shifts focus away from stress.', 1),
 ('Grounding', 'Mindful Breathing', 'Breathe in slowly for 4 counts, hold for 4 counts, and breathe out slowly for 6 counts. Repeat 5 times.', 2),
-('Crisis Contact', 'National Suicide Prevention Lifeline', 'Call or text 988 (USA/Canada). Available 24/7.', 3),
-('Crisis Contact', 'Crisis Text Line', 'Text HOME to 741741 (USA/Canada). Available 24/7.', 4);
+('Crisis Contact', 'Indian Mental Health Support', 'Call 1800-599-0019. Available 24/7.', 3),
+('Crisis Contact', 'AASRA', 'Call +91-9820466726. Available 24/7.', 4);
 
 -- create journal_prompts table
 CREATE TABLE journal_prompts (
@@ -63,4 +63,3 @@ CREATE TABLE goals (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
-

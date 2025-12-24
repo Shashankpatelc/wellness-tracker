@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
 
     // Ollama API Integration
     $ollama_url = 'http://localhost:11434/api/generate';
-    $model_name = 'llama3:8b'; // Use the model specified by the user
+    $model_name = 'phi3:mini'; // Use the model specified by the user
 
     // System prompt to make AI act as a stress reliever
     $system_prompt = "You are a compassionate and empathetic stress relief coach. Your role is to help users relax, manage stress, and improve their mental wellness.
