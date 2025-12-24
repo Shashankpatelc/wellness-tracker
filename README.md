@@ -134,10 +134,10 @@ wellness-tracker/
 
 ```bash
 # Connect to MySQL
-mysql -u root -p
+mysql -u username -p password
 
 # Run the schema (creates database + admin user)
-source /var/www/html/wellness-tracker/database/create_table.sql;
+wellness-tracker/database/create_table.sql;
 ```
 
 **Database will include:**
