@@ -8,6 +8,7 @@ CREATE TABLE users (
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -63,3 +64,8 @@ CREATE TABLE goals (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+
+-- create admin user
+-- Username: admin | Password: admin@123 (change this after first login!)
+INSERT INTO users (username, email, password_hash, role) VALUES 
+('admin', 'admin@wellnesstracker.local', '$2y$10$zAvDiL.l99iVWoLwcKaRc.i3drGxoTjvvrml2b1xw2cdEAx1oJlXC', 'admin');
