@@ -177,7 +177,7 @@
                         voiceStatus.textContent = '❌ Could not start recording. Already recording?';
                         setTimeout(() => {
                             voiceStatus.textContent = '';
-                        }, 3000);
+                        }, 5000);
                     }
                 }
             });
