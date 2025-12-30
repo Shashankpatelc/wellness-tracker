@@ -58,7 +58,7 @@ mysqli_close($conn);
         <h1>Immediate Support & Coping Resources</h1>
         <p>If you are in crisis, please use the contact resources below. You are not alone.</p>
         <div class="auth-buttons">
-            <a href="<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) ? 'dashboard.php' : '../index.php'; ?>" class="button primary">Back to App</a>
+            <a href="<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) ? 'dashboard.php' : '../index.php'; ?>" class="button primary">Dashboard</a>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
                 <div class="profile-dropdown">
                     <button class="profile-dropdown-btn" id="profileDropdownBtn">

@@ -12,11 +12,11 @@
         <p>Manage your account settings and view your wellness journey</p>
         
         <div class="auth-buttons">
-            <a href="../php/dashboard.php" class="button">Dashboard</a>
-            <a href="../php/goals.php" class="button">My Goals</a>
-            <a href="../php/summary.php" class="button">Summary</a>
-            <a href="../php/ai_chat.php" class="button">AI Chat</a>
-            <a href="../php/help.php" class="button">Quick Support</a>
+            <a href="/wellness-tracker/php/dashboard.php" class="button">Dashboard</a>
+            <a href="/wellness-tracker/php/goals.php" class="button">My Goals</a>
+            <a href="/wellness-tracker/php/summary.php" class="button">Summary</a>
+            <a href="/wellness-tracker/php/ai_chat.php" class="button">AI Chat</a>
+            <a href="/wellness-tracker/php/help.php" class="button">Quick Support</a>
             
             <div class="profile-dropdown">
                 <button class="profile-dropdown-btn" id="profileDropdownBtn">
@@ -25,13 +25,13 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="profile-dropdown-menu" id="profileDropdownMenu">
-                    <a href="profile.php">
+                    <a href="/wellness-tracker/php/profile.php">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> View Profile
                     </a>
-                    <a href="profile.php#edit">
+                    <a href="/wellness-tracker/php/profile.php#edit">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Information
                     </a>
-                    <a href="logout.php" class="danger">
+                    <a href="/wellness-tracker/php/logout.php" class="danger">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out
                     </a>
                 </div>
@@ -124,7 +124,7 @@
         <!-- Edit Profile Form -->
         <section class="edit-profile-section">
             <h2>Edit Profile</h2>
-            <form action="profile.php" method="post" class="profile-form">
+            <form action="/wellness-tracker/php/profile.php" method="post" class="profile-form">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($user_data['username']); ?>" required>
@@ -144,7 +144,7 @@
         <!-- Change Password Form -->
         <section class="change-password-section">
             <h2>Change Password</h2>
-            <form action="profile.php" method="post" class="profile-form">
+            <form action="/wellness-tracker/php/profile.php" method="post" class="profile-form">
                 <div class="form-group">
                     <label for="current_password">Current Password</label>
                     <input type="password" name="current_password" id="current_password" required>
@@ -186,7 +186,7 @@
             <h2 style="color: var(--danger-color);">⚠️ Confirm Account Deletion</h2>
             <p>This action cannot be undone. All your data will be permanently deleted.</p>
             
-            <form action="profile.php" method="post" id="deleteForm">
+            <form action="/wellness-tracker/php/profile.php" method="post" id="deleteForm">
                 <div class="form-group">
                     <label for="confirm_delete_password">Enter your password to confirm:</label>
                     <input type="password" name="confirm_delete_password" id="confirm_delete_password" required>

@@ -10,7 +10,7 @@ session_start();
 
 // Access Control: If the user is NOT logged in, redirect them to the login page (root to html)
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../html/login.html");
+    header("location: /wellness-tracker/index.php");
     exit;
 }
 

@@ -4,7 +4,7 @@
 session_start();
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../html/login.html");
+    header("location: /wellness-tracker/index.php");
     exit;
 }
 
@@ -247,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_account'])) {
                             mysqli_stmt_close($stmt_delete);
                             mysqli_close($conn);
                             session_destroy();
-                            header("location: ../index.php?deleted=1");
+                            header("location: /wellness-tracker/index.php?deleted=1");
                             exit;
                         }
                         mysqli_stmt_close($stmt_delete);

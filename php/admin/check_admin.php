@@ -8,14 +8,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Check if user is logged in
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../../html/login.html");
+    header("location: /wellness-tracker/index.php");
     exit;
 }
 
 // Check if user is an admin
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !== 'admin') {
     // Redirect non-admins to the regular dashboard with an error (optional)
-    header("location: ../dashboard.php");
+    header("location: /wellness-tracker/php/dashboard.php");
     exit;
 }
 ?>
