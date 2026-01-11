@@ -52,9 +52,9 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container scale-in delay-200">
         
-        <section class="tracking-form">
+        <section class="tracking-form fade-in-up">
             <h2>Track Your Day</h2>
             <div class="alert"> <?php echo $submission_message; ?></div>
             
@@ -80,7 +80,7 @@
             </form>
         </section>
         
-        <section class="data-visualization container">
+        <section class="data-visualization container fade-in-up delay-100">
             <h2>Mood and Stress Trends (<?php echo $chart_label; ?>)</h2>
             <form action="/wellness-tracker/php/dashboard.php" method="get" class="chart-period-form">
                 <label for="period">Select Period:</label>
@@ -95,7 +95,7 @@
 
         <hr>
         
-        <section class="past-entries">
+        <section class="past-entries fade-in-up delay-200">
             <h2>Your Recent Progress</h2>
             
             <?php if (empty($entries)): ?>
@@ -135,9 +135,22 @@
 <script>
     // Chart.js Script
     const chartData = <?php echo $json_chart_data; ?>;
-    const ctx = document.getElementById('moodStressChart');
+    const canvas = document.getElementById('moodStressChart');
+    const ctx = canvas.getContext('2d');
 
     if (chartData.dates.length > 0) {
+        // Create gradient for mood (green)
+        const moodGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        moodGradient.addColorStop(0, 'rgba(16, 185, 129, 0.8)');
+        moodGradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.4)');
+        moodGradient.addColorStop(1, 'rgba(16, 185, 129, 0.1)');
+
+        // Create gradient for stress (red to orange)
+        const stressGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        stressGradient.addColorStop(0, 'rgba(239, 68, 68, 0.8)');
+        stressGradient.addColorStop(0.5, 'rgba(239, 68, 68, 0.4)');
+        stressGradient.addColorStop(1, 'rgba(239, 68, 68, 0.1)');
+
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -145,39 +158,114 @@
                 datasets: [{
                     label: 'Mood Score (0-10)',
                     data: chartData.mood_scores,
-                    borderColor: '#5aa65a',
-                    backgroundColor: 'rgba(90, 166, 90, 0.2)',
-                    tension: 0.3,
-                    fill: false
+                    borderColor: '#10b981',
+                    backgroundColor: moodGradient,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointHoverBackgroundColor: '#059669',
+                    pointHoverBorderColor: '#fff'
                 },
                 {
                     label: 'Stress Score (0-10)',
                     data: chartData.stress_scores,
-                    borderColor: '#d9534f',
-                    backgroundColor: 'rgba(217, 83, 79, 0.2)',
-                    tension: 0.3,
-                    fill: false
+                    borderColor: '#ef4444',
+                    backgroundColor: stressGradient,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#ef4444',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointHoverBackgroundColor: '#dc2626',
+                    pointHoverBorderColor: '#fff'
                 }]
             },
             options: {
                 responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 10,
-                        title: {
-                            display: true,
-                            text: 'Score (0 to 10)'
-                        }
-                    }
+                maintainAspectRatio: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
                 },
                 plugins: {
                     legend: {
                         position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 15,
+                            font: {
+                                size: 13,
+                                family: "'Poppins', sans-serif",
+                                weight: '600'
+                            }
+                        }
                     },
                     title: {
                         display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: {
+                            size: 14,
+                            family: "'Poppins', sans-serif"
+                        },
+                        bodyFont: {
+                            size: 13,
+                            family: "'Inter', sans-serif"
+                        },
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1
                     }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 12
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Score (0 to 10)',
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 13,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 11
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuart'
                 }
             }
         });
@@ -223,5 +311,7 @@
         });
     }
 </script>
+<script src="../js/animations.js"></script>
+<script src="../js/visual-utils.js"></script>
 </body>
 </html>

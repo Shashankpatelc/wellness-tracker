@@ -41,8 +41,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <section class="add-goal-form">
+    <div class="container scale-in delay-200">
+        <section class="add-goal-form fade-in-up">
             <h2>Add a New Goal</h2>
             <?php if(!empty($message)): ?>
                 <div class="alert"><?php echo $message; ?></div>
@@ -58,7 +58,7 @@
 
         <hr>
 
-        <section class="goals-list">
+        <section class="goals-list fade-in-up delay-100">
             <h2>Your Goals</h2>
             <?php if (empty($goals)): ?>
                 <p>No goals set yet. Add your first goal above!</p>
@@ -126,5 +126,7 @@
         });
     }
 </script>
+<script src="../js/animations.js"></script>
+<script src="../js/visual-utils.js"></script>
 </body>
 </html>

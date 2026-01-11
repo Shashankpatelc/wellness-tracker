@@ -41,8 +41,17 @@
         </div>
     </div>
 
-    <div class="container">
-        <section class="summary-section">
+    <div class="container scale-in delay-200">
+        <!-- Mood Calendar Heatmap -->
+        <section class="summary-section fade-in-up">
+            <h2>📅 Mood Calendar</h2>
+            <p>Visual representation of your mood over the last 90 days</p>
+            <div id="moodCalendarContainer"></div>
+        </section>
+
+        <hr>
+
+        <section class="summary-section fade-in-up">
             <h2>Monthly Summary</h2>
             <?php if (empty($monthly_summary)): ?>
                 <p>No data available for monthly summary.</p>
@@ -70,7 +79,7 @@
 
         <hr>
 
-        <section class="summary-section">
+        <section class="summary-section fade-in-up delay-100">
             <h2>Yearly Summary</h2>
             <?php if (empty($yearly_summary)): ?>
                 <p>No data available for yearly summary.</p>
@@ -131,6 +140,33 @@
                 profileDropdown.classList.remove('active');
             }
         });
+    }
+</script>
+<script src="../js/animations.js"></script>
+<script src="../js/visual-utils.js"></script>
+<script src="../js/mood-calendar.js"></script>
+<script>
+    // Initialize mood calendar with PHP data
+    <?php
+    // Fetch mood data for calendar (last 90 days)
+    $calendar_query = "SELECT DATE(entry_date) as date, mood_score 
+                      FROM wellness_entries 
+                      WHERE user_id = ? AND entry_date >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)
+                      ORDER BY entry_date ASC";
+    $calendar_stmt = $conn->prepare($calendar_query);
+    $calendar_stmt->bind_param("i", $user_id);
+    $calendar_stmt->execute();
+    $calendar_result = $calendar_stmt->get_result();
+    
+    $calendar_data = [];
+    while ($row = $calendar_result->fetch_assoc()) {
+        $calendar_data[] = $row;
+    }
+    ?>
+    
+    const calendarData = <?php echo json_encode($calendar_data); ?>;
+    if (typeof createMoodCalendar === 'function') {
+        createMoodCalendar('moodCalendarContainer', calendarData);
     }
 </script>
 </body>

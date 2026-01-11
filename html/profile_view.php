@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container scale-in delay-200">
         
         <?php if (!empty($message)): ?>
             <div class="alert"><?php echo $message; ?></div>
@@ -59,7 +59,7 @@
         <?php endif; ?>
 
         <!-- Profile Information -->
-        <section class="profile-info-section">
+        <section class="profile-info-section fade-in-up">
             <h2>Account Information</h2>
             <div class="profile-info-card">
                 <div class="info-row">
@@ -78,38 +78,38 @@
         </section>
 
         <!-- Statistics Dashboard -->
-        <section class="stats-section">
+        <section class="stats-section fade-in-up delay-100">
             <h2>Your Wellness Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
+            <div class="stats-grid" data-stagger>
+                <div class="stat-card hover-lift">
                     <div class="stat-icon">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20V10M6 20V16M18 20V4"></path></svg>
                     </div>
                     <div class="stat-value"><?php echo $stats['total_entries']; ?></div>
                     <div class="stat-label">Total Entries</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card hover-lift">
                     <div class="stat-icon">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M17.657 18.657A8 8 0 0 1 6.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0 1 20 13a7.975 7.975 0 0 1-2.343 5.657z"></path><path d="M9.879 16.121A3 3 0 1 0 12.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
                     </div>
                     <div class="stat-value"><?php echo $stats['current_streak']; ?> Days</div>
                     <div class="stat-label">Day Streak</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card hover-lift">
                     <div class="stat-icon">
                         <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                     </div>
                     <div class="stat-value"><?php echo $stats['avg_mood']; ?></div>
                     <div class="stat-label">Avg Mood (30d)</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card hover-lift">
                     <div class="stat-icon">
                         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                     </div>
                     <div class="stat-value"><?php echo $stats['avg_stress']; ?></div>
                     <div class="stat-label">Avg Stress (30d)</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card hover-lift">
                     <div class="stat-icon">
                         <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     </div>
@@ -258,5 +258,7 @@
             }
         };
     </script>
+<script src="../js/animations.js"></script>
+<script src="../js/visual-utils.js"></script>
 </body>
 </html>

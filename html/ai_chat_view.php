@@ -41,8 +41,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <section class="chat-interface">
+    <div class="container scale-in delay-200">
+        <section class="chat-interface fade-in-up">
             <div class="wellness-info">
                 <h3>📊 Your Wellness Today</h3>
                 <div class="stats-grid">
@@ -265,49 +265,64 @@
         })
         .then(response => response.json())
         .then(data => {
+            
+            if (!data || !data.response) {
+                console.error('Invalid response structure:', data);
+                
+                // Show error message to user
+                const errorDiv = document.createElement('div');
+                errorDiv.classList.add('message', 'ai-message');
+                const errorP1 = document.createElement('p');
+                errorP1.className = 'message-sender';
+                errorP1.textContent = '🤖 Guide';
+                const errorP2 = document.createElement('p');
+                errorP2.textContent = 'Oops! Something went wrong. Please try again later.';
+                errorDiv.appendChild(errorP1);
+                errorDiv.appendChild(errorP2);
+                chatDisplay.appendChild(errorDiv);
+                chatDisplay.scrollTop = chatDisplay.scrollHeight;
+                return;
+            }
+            
+            const responseText = data.response;
+            
+            // Create AI message container
             const aiMessageDiv = document.createElement('div');
             aiMessageDiv.classList.add('message', 'ai-message');
-            const responseText = data.response; // Don't escape - keep special chars
-            aiMessageDiv.innerHTML = `<p class="message-sender">🤖 Guide</p><p class="typing-text"></p>`;
+            
+            // Create sender paragraph
+            const senderP = document.createElement('p');
+            senderP.className = 'message-sender';
+            senderP.textContent = '🤖 Guide';
+            
+            // Create typing text paragraph
+            const typingP = document.createElement('p');
+            typingP.className = 'typing-text';
+            
+            // Append both paragraphs
+            aiMessageDiv.appendChild(senderP);
+            aiMessageDiv.appendChild(typingP);
             chatDisplay.appendChild(aiMessageDiv);
             
-            // Get the paragraph element where text will be typed
-            const typingElement = aiMessageDiv.querySelector('.typing-text');
+            // Display text immediately
+            typingP.textContent = responseText;
             
-            // Add typing effect
-            typeWriter(responseText, typingElement);
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
         })
         .catch(error => {
             console.error('Error:', error);
             const errorMessageDiv = document.createElement('div');
             errorMessageDiv.classList.add('message', 'ai-message');
-            errorMessageDiv.innerHTML = `<p class="message-sender">🤖 Guide</p><p>Oops! Something went wrong. Please try again later.</p>`;
+            const errorP1 = document.createElement('p');
+            errorP1.className = 'message-sender';
+            errorP1.textContent = '🤖 Guide';
+            const errorP2 = document.createElement('p');
+            errorP2.textContent = 'Oops! Something went wrong. Please try again later.';
+            errorMessageDiv.appendChild(errorP1);
+            errorMessageDiv.appendChild(errorP2);
             chatDisplay.appendChild(errorMessageDiv);
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
         });
-    }
-
-    function typeWriter(text, element) {
-        let index = 0;
-        const typingSpeed = 30; // milliseconds per character
-        
-        function type() {
-            if (index < text.length) {
-                // Add one character at a time
-                element.textContent += text.charAt(index);
-                index++;
-                
-                // Scroll chat to bottom as text is being typed
-                chatDisplay.scrollTop = chatDisplay.scrollHeight;
-                
-                // Continue typing
-                setTimeout(type, typingSpeed);
-            }
-        }
-        
-        // Start the typing animation
-        type();
     }
 
     function htmlspecialchars(str) {
@@ -321,5 +336,7 @@
         return str.replace(/[&<>"']/g, function(m) { return map[m]; });
     }
 </script>
+<script src="../js/animations.js"></script>
+<script src="../js/visual-utils.js"></script>
 </body>
 </html>

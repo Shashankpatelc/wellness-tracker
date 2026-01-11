@@ -17,12 +17,12 @@ require_once 'php/connect_db.php';
 </head>
 <body>
     <div class="header">
-        <h1>🌟 Wellness Tracker</h1>
-        <p>Your private, supportive companion for tracking mood and managing stress</p>
+        <h1 class="fade-in-down">🌟 Wellness Tracker</h1>
+        <p class="fade-in-up delay-100">Your private, supportive companion for tracking mood and managing stress</p>
         
-        <div class="auth-buttons">
-            <button id="showLoginPopupBtn" class="button">Log In</button>
-            <button id="showRegisterPopupBtn" class="button primary">Sign Up Free</button>
+        <div class="auth-buttons fade-in-up delay-200">
+            <button id="showLoginPopupBtn" class="button hover-lift">Log In</button>
+            <button id="showRegisterPopupBtn" class="button primary hover-lift">Sign Up Free</button>
             <div class="dark-mode-toggle">
                 <label for="dark-mode-switch">Dark Mode</label>
                 <label class="toggle-switch">
@@ -33,46 +33,46 @@ require_once 'php/connect_db.php';
         </div>
     </div>
     
-    <div class="container">
+    <div class="container scale-in delay-300">
         <section class="mission-section text-center">
             <h2>Welcome to Your Wellness Journey</h2>
             <p>Take control of your mental health with our simple, non-judgmental tracking platform.</p>
         </section>
 
         <section class="features-section">
-            <h3>Why Choose Wellness Tracker?</h3>
-            <div class="features-grid">
-                <div class="feature-card">
+            <h3 class="fade-in-up">Why Choose Wellness Tracker?</h3>
+            <div class="features-grid" data-stagger>
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">📊</div>
                     <h4>Track Your Mood</h4>
                     <p>Monitor your daily mood and stress levels with our intuitive interface. Identify patterns and trends over time.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">🛡️</div>
                     <h4>100% Private & Secure</h4>
                     <p>Your data is encrypted and stored securely. Only you can access your personal wellness records.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">🧘</div>
                     <h4>Grounding Techniques</h4>
                     <p>Get instant access to calming exercises and grounding techniques when you need them most.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">📈</div>
                     <h4>Visual Insights</h4>
                     <p>Beautiful charts and graphs help you understand your emotional patterns at a glance.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">📝</div>
                     <h4>Journal Entries</h4>
                     <p>Reflect on your day with guided journal prompts. Write freely and process your emotions.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card hover-lift">
                     <div class="feature-icon">🤝</div>
                     <h4>Supportive Community</h4>
                     <p>Connect with others on their wellness journey. Find encouragement and share experiences.</p>
@@ -80,9 +80,9 @@ require_once 'php/connect_db.php';
             </div>
         </section>
 
-        <section class="how-it-works">
+        <section class="how-it-works fade-in-up">
             <h3>How It Works</h3>
-            <div class="steps">
+            <div class="steps" data-stagger>
                 <div class="step">
                     <div class="step-number">1</div>
                     <h4>Sign Up</h4>
@@ -106,10 +106,10 @@ require_once 'php/connect_db.php';
             </div>
         </section>
 
-        <section class="cta-section text-center">
+        <section class="cta-section text-center fade-in-up">
             <h3>Ready to Start Your Journey?</h3>
             <p>Join thousands of people taking control of their mental health today.</p>
-            <button id="showRegisterPopupBtn2" class="button primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Get Started Now</button>
+            <button id="showRegisterPopupBtn2" class="button primary hover-lift elastic-bounce" style="padding: 1rem 2rem; font-size: 1.1rem;">Get Started Now</button>
         </section>
     </div>
 
@@ -123,6 +123,8 @@ require_once 'php/connect_db.php';
         </div>
     </div>
 
+    <script src="js/animations.js"></script>
+    <script src="js/visual-utils.js"></script>
     <script>
         const showLoginPopupBtn = document.getElementById("showLoginPopupBtn");
         const showRegisterPopupBtn = document.getElementById("showRegisterPopupBtn");

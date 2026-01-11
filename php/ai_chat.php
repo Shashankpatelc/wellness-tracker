@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
 
     // Get user ID and fetch their recent mood/stress scores
     require_once 'connect_db.php';
+    require_once '../config/ai_config.php';
     $user_id = $_SESSION["user_id"];
     
     // Fetch latest mood and stress scores
@@ -57,12 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
     
     mysqli_close($conn);
 
-    // Ollama API Integration
-    $ollama_url = 'http://localhost:11434/api/generate';
-    $model_name = 'phi3:mini'; // Use the model specified by the user
+    // Groq API Integration (OpenAI-compatible)
+    $api_url = GROQ_API_URL;
 
     // System prompt to make AI act as a stress reliever
-    $system_prompt = "You are a compassionate and empathetic stress relief coach. Your role is to help users relax, manage stress, and improve their mental wellness.
+    $system_instruction = "You are a compassionate and empathetic stress relief coach. Your role is to help users relax, manage stress, and improve their mental wellness.
 
 USER WELLNESS DATA:
 - Current Mood Score: " . $user_stats['latest_mood'] . "/10
@@ -90,38 +90,51 @@ RESPONSE FORMAT: Your responses should be brief, focused, and actionable. Never 
 
 Remember: You are here to help them feel better, not to diagnose or replace professional medical advice.";
 
-    // Combine system prompt with user message
-    $full_prompt = $system_prompt . "\n\nUser: " . $user_message . "\n\nStress Relief Coach:";
-
     $data = [
-        'model' => $model_name,
-        'prompt' => $full_prompt,
-        'stream' => false, // We want the full response at once
-        'num_predict' => 150 // Limit response to approximately 150 tokens (roughly 100-150 words)
+        'model' => GROQ_MODEL,
+        'messages' => [
+            [
+                'role' => 'system',
+                'content' => $system_instruction
+            ],
+            [
+                'role' => 'user',
+                'content' => $user_message
+            ]
+        ],
+        'max_tokens' => AI_MAX_TOKENS,
+        'temperature' => AI_TEMPERATURE
     ];
 
     $options = [
         'http' => [
-            'header'  => "Content-type: application/json\r\n",
+            'header'  => "Content-type: application/json\r\nAuthorization: Bearer " . GROQ_API_KEY . "\r\n",
             'method'  => 'POST',
             'content' => json_encode($data),
-            'timeout' => 60, // Timeout in seconds
+            'timeout' => 30,
         ],
     ];
 
-    $context  = stream_context_create($options);
-    $result = @file_get_contents($ollama_url, false, $context);
+    $context = stream_context_create($options);
+    $result = @file_get_contents($api_url, false, $context);
 
     if ($result === FALSE) {
-        $ai_response = "Error: Could not connect to Ollama API or API call failed.";
-        error_log("Ollama API Error: " . error_get_last()['message']);
+        $error = error_get_last();
+        $ai_response = "I'm having trouble connecting right now. Please check your API key and try again.";
+        error_log("Groq API Connection Error: " . ($error['message'] ?? 'Unknown error'));
     } else {
         $response_data = json_decode($result, true);
-        if (isset($response_data['response'])) {
-            $ai_response = $response_data['response'];
+        
+        // Check for API errors
+        if (isset($response_data['error'])) {
+            $error_message = $response_data['error']['message'] ?? 'Unknown API error';
+            $ai_response = "API Error: " . $error_message;
+            error_log("Groq API Error Response: " . json_encode($response_data['error']));
+        } elseif (isset($response_data['choices'][0]['message']['content'])) {
+            $ai_response = $response_data['choices'][0]['message']['content'];
         } else {
-            $ai_response = "Error: Unexpected response from Ollama API.";
-            error_log("Ollama API Unexpected Response: " . $result);
+            $ai_response = "I'm having trouble understanding. Could you rephrase that?";
+            error_log("Groq API Unexpected Response Structure: " . $result);
         }
     }
 
