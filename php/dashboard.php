@@ -87,7 +87,7 @@ if ($result_prompt = mysqli_query($conn, $sql_prompt)) {
     }
 }
 
-// === 2. Data Retrieval Logic (For Table and Chart) ===
+// 2. Data Retrieval Logic (For Table and Chart) 
 $period = isset($_GET['period']) ? (int)$_GET['period'] : 7;
 $chart_label = "Last {$period} Days";
 

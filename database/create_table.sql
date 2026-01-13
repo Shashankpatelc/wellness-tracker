@@ -66,6 +66,6 @@ CREATE TABLE goals (
 );
 
 -- create admin user
--- Username: admin | Password: admin@123 (change this after first login!)
+-- Username: admin | Password: admin@123 
 INSERT INTO users (username, email, password_hash, role) VALUES 
 ('admin', 'admin@wellnesstracker.local', '$2y$10$zAvDiL.l99iVWoLwcKaRc.i3drGxoTjvvrml2b1xw2cdEAx1oJlXC', 'admin');

@@ -7,7 +7,7 @@ require_once '../connect_db.php';
 $message = "";
 $error = "";
 
-// --- Handle User Deletion ---
+// Handle User Deletion 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user_id'])) {
     $delete_id = intval($_POST['delete_user_id']);
     
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user_id'])) {
     }
 }
 
-// --- Fetch All Users ---
+// Fetch All Users 
 $users = [];
 $sql = "SELECT user_id, username, email, role, created_at FROM users ORDER BY created_at DESC";
 $result = $conn->query($sql);

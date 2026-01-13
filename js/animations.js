@@ -3,7 +3,7 @@
  * Handles scroll-based animations, counters, and interactive effects
  */
 
-// ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
+// INTERSECTION OBSERVER FOR SCROLL ANIMATIONS 
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -33,7 +33,7 @@ function initScrollAnimations() {
     });
 }
 
-// ===== STAGGER ANIMATIONS =====
+//  STAGGER ANIMATIONS 
 function staggerChildren(parent) {
     const children = parent.children;
     Array.from(children).forEach((child, index) => {
@@ -43,7 +43,7 @@ function staggerChildren(parent) {
     });
 }
 
-// ===== COUNTER ANIMATIONS =====
+//  COUNTER ANIMATIONS 
 function animateCounter(element, start, end, duration) {
     let startTime = null;
     const step = (timestamp) => {
@@ -80,7 +80,7 @@ function initCounters() {
     counters.forEach(counter => counterObserver.observe(counter));
 }
 
-// ===== TABLE ROW ANIMATIONS =====
+//  TABLE ROW ANIMATIONS 
 function animateTableRows() {
     const tables = document.querySelectorAll('.entries-table tbody');
 
@@ -99,7 +99,7 @@ function animateTableRows() {
     });
 }
 
-// ===== RIPPLE EFFECT FOR BUTTONS =====
+//  RIPPLE EFFECT FOR BUTTONS 
 function createRipple(event) {
     const button = event.currentTarget;
 
@@ -123,7 +123,7 @@ function createRipple(event) {
     button.appendChild(circle);
 }
 
-// ===== SMOOTH SCROLL =====
+//  SMOOTH SCROLL 
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -142,7 +142,7 @@ function initSmoothScroll() {
     });
 }
 
-// ===== LOADING SPINNER =====
+//  LOADING SPINNER 
 function showLoadingSpinner(container) {
     const spinner = document.createElement('div');
     spinner.className = 'loading-spinner';
@@ -158,7 +158,7 @@ function hideLoadingSpinner(spinner) {
     }
 }
 
-// ===== CARD FLIP ANIMATION =====
+//  CARD FLIP ANIMATION 
 function initCardFlips() {
     const flipCards = document.querySelectorAll('.flip-card');
 
@@ -169,7 +169,7 @@ function initCardFlips() {
     });
 }
 
-// ===== PARALLAX EFFECT =====
+//  PARALLAX EFFECT 
 function initParallax() {
     const parallaxElements = document.querySelectorAll('[data-parallax]');
 
@@ -182,7 +182,7 @@ function initParallax() {
     });
 }
 
-// ===== TYPING ANIMATION =====
+//  TYPING ANIMATION 
 function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.textContent = '';
@@ -198,7 +198,7 @@ function typeWriter(element, text, speed = 50) {
     type();
 }
 
-// ===== PULSE ANIMATION ON HOVER =====
+//  PULSE ANIMATION ON HOVER 
 function initPulseOnHover() {
     const pulseElements = document.querySelectorAll('.pulse-on-hover');
 
@@ -213,7 +213,7 @@ function initPulseOnHover() {
     });
 }
 
-// ===== SHAKE ANIMATION FOR ERRORS =====
+//  SHAKE ANIMATION FOR ERRORS 
 function shakeElement(element) {
     element.classList.add('shake-animation');
     setTimeout(() => {
@@ -221,7 +221,7 @@ function shakeElement(element) {
     }, 500);
 }
 
-// ===== INITIALIZE ALL ANIMATIONS =====
+//  INITIALIZE ALL ANIMATIONS 
 function initAnimations() {
     // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {

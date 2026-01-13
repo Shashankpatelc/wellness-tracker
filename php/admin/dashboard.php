@@ -4,7 +4,7 @@
 require_once 'check_admin.php';
 require_once '../connect_db.php';
 
-// --- Fetch System Statistics ---
+// Fetch System Statistics 
 
 // 1. Total Users
 $total_users = 0;

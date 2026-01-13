@@ -1,7 +1,7 @@
 <?php
 // php/register.php
 
-require_once 'connect_db.php'; // Use modular connection
+require_once 'connect_db.php';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST['username'];

@@ -1,11 +1,11 @@
 -- Seed file for mood_entries table
--- Generates 30 days of sample mood data for user_id = 1 (admin)
+-- Generates 30 days of sample mood data for user_id = (Enter the user Id) (admin)
 -- Run this after creating a user account, or update user_id as needed
 
 USE wellness_tracker_db;
 
 -- Delete existing mood entries for user_id 1 (optional - uncomment if needed)
--- DELETE FROM mood_entries WHERE user_id = 1;
+-- DELETE FROM mood_entries WHERE user_id = (Enter the user Id);
 
 -- Insert 30 days of mood data (from 2025-12-14 to 2026-01-12)
 INSERT INTO mood_entries (user_id, mood_score, stress_score, notes, entry_date) VALUES

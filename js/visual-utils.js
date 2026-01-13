@@ -3,7 +3,7 @@
  * Toast notifications, progress rings, badges, and visual feedback
  */
 
-// ===== TOAST NOTIFICATIONS =====
+//  TOAST NOTIFICATIONS 
 const Toast = {
     show: function (message, type = 'info', duration = 3000) {
         const toast = document.createElement('div');
@@ -77,7 +77,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ===== CIRCULAR PROGRESS RING =====
+//  CIRCULAR PROGRESS RING 
 function createProgressRing(value, max = 10, label = '', color = '#6366f1') {
     const percentage = (value / max) * 100;
     const circumference = 2 * Math.PI * 54; // radius = 54
@@ -110,7 +110,7 @@ function adjustColor(color, amount) {
     return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
 }
 
-// ===== MOOD EMOJI INDICATOR =====
+//  MOOD EMOJI INDICATOR 
 const moodEmojis = {
     0: '😢',
     1: '😞',
@@ -132,7 +132,7 @@ function updateMoodIndicator(value, targetElement) {
     targetElement.className = 'mood-indicator';
 }
 
-// ===== STREAK BADGE =====
+//  STREAK BADGE 
 function createStreakBadge(days) {
     const badge = document.createElement('div');
     badge.className = 'streak-badge';
@@ -144,7 +144,7 @@ function createStreakBadge(days) {
     return badge;
 }
 
-// ===== ACHIEVEMENT BADGE =====
+//  ACHIEVEMENT BADGE 
 function createBadge(text, type = 'primary', icon = '') {
     const badge = document.createElement('span');
     badge.className = `badge ${type}`;
@@ -155,7 +155,7 @@ function createBadge(text, type = 'primary', icon = '') {
     return badge;
 }
 
-// ===== CONFETTI ANIMATION (for goal completion) =====
+//  CONFETTI ANIMATION (for goal completion) 
 function celebrateWithConfetti() {
     const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
     const confettiCount = 50;
@@ -188,7 +188,7 @@ function celebrateWithConfetti() {
     }
 }
 
-// ===== FLOATING ACTION BUTTON =====
+//  FLOATING ACTION BUTTON 
 function createFAB(onClick, icon = '+') {
     const fab = document.createElement('button');
     fab.className = 'fab';
@@ -198,7 +198,7 @@ function createFAB(onClick, icon = '+') {
     return fab;
 }
 
-// ===== AUTO-INITIALIZE MOOD SLIDERS =====
+//  AUTO-INITIALIZE MOOD SLIDERS 
 function initMoodSliders() {
     const moodSlider = document.getElementById('mood_score');
     const stressSlider = document.getElementById('stress_score');
