@@ -64,11 +64,31 @@
                     </div>
                 </div>
             </div>
-            <div class="chat-display" id="chat-display">
-                <div class="message ai-message">
-                    <p class="message-sender">🤖 Guide</p>
-                    <p>Hello, <?php echo htmlspecialchars($username); ?>! I'm here to listen and help you relax. How are you feeling today?</p>
+            
+            <?php if (isset($show_sentiment_notification) && $show_sentiment_notification === true): ?>
+                <div class="sentiment-notification fade-in-up" id="sentimentNotification">
+                    <div class="notification-icon">💙</div>
+                    <div class="notification-content">
+                        <strong>I'm here for you</strong>
+                        <p>I noticed you might need some support. Let's talk - you're not alone. 🌟</p>
+                    </div>
                 </div>
+            <?php endif; ?>
+            
+            <div class="chat-display" id="chat-display">
+                <?php if (isset($show_sentiment_notification) && $show_sentiment_notification === true): ?>
+                    <!-- Auto-start message when redirected from sentiment analysis -->
+                    <div class="message ai-message">
+                        <p class="message-sender">🤖 Guide</p>
+                        <p><?php echo htmlspecialchars($sentiment_prompt ?? 'I\'m here to support you. How are you feeling?'); ?></p>
+                    </div>
+                <?php else: ?>
+                    <!-- Default welcome message -->
+                    <div class="message ai-message">
+                        <p class="message-sender">🤖 Guide</p>
+                        <p>Hello, <?php echo htmlspecialchars($username); ?>! I'm here to listen and help you relax. How are you feeling today?</p>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="chat-input">
                 <input type="text" id="user-message" placeholder="Type your message here...">

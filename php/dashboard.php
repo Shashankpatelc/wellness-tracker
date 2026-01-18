@@ -74,9 +74,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['mood_score'])) {
             }
             mysqli_stmt_close($check_stmt);
         }
+        
+        // === AI SENTIMENT ANALYSIS ===
+        // Analyze journal entry sentiment if notes were provided
+        if (!empty($notes) && strlen(trim($notes)) >= 5) {
+            require_once __DIR__ . '/analyze_sentiment.php';
+            
+            $sentiment_result = analyzeSentiment($notes);
+            
+            // If user requires support (negative sentiment detected)
+            if ($sentiment_result['requires_support'] === true) {
+                // Generate encouraging prompt based on their scores and sentiment
+                $encouraging_prompt = getEncouragingPrompt($mood_score, $stress_score, $sentiment_result);
+                
+                // Store prompt in session to be used by AI chat
+                $_SESSION['ai_pre_prompt'] = $encouraging_prompt;
+                $_SESSION['sentiment_redirect'] = true;
+                
+                // Redirect to AI chat for proactive support
+                header("location: /wellness-tracker/php/ai_chat.php");
+                exit;
+            }
+            // Handle positive sentiment - celebrate with user!
+            elseif ($sentiment_result['sentiment'] === 'positive') {
+                // Generate positive affirmation
+                $celebration_message = getPositiveAffirmation($mood_score, $stress_score);
+                
+                // Store in session to show celebration banner on dashboard
+                $_SESSION['show_celebration'] = true;
+                $_SESSION['celebration_message'] = $celebration_message;
+            }
+            // TODO: Handle neutral sentiment (currently no special action)
+        }
     }
+
 }
 
+
+// === FETCH INCOMPLETE GOALS FOR REMINDER ===
+$pending_goals = [];
+$sql = "SELECT goal_id, goal_text, created_at FROM goals 
+        WHERE user_id = ? AND is_completed = 0 
+        ORDER BY created_at ASC LIMIT 3";
+if ($stmt = mysqli_prepare($conn, $sql)) {
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    if (mysqli_stmt_execute($stmt)) {
+        $result = mysqli_stmt_get_result($stmt);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $pending_goals[] = $row;
+        }
+    }
+    mysqli_stmt_close($stmt);
+}
 
 // Fetch a random journal prompt
 $journal_prompt = "";

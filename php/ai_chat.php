@@ -183,5 +183,15 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
 
 mysqli_close($conn);
 
+// Capture session flags BEFORE clearing them (for view to use)
+$show_sentiment_notification = isset($_SESSION['sentiment_redirect']) && $_SESSION['sentiment_redirect'] === true;
+$sentiment_prompt = $_SESSION['ai_pre_prompt'] ?? null;
+
 require_once '../html/ai_chat_view.php';
+
+// Clear sentiment redirect flags AFTER view has displayed them
+if (isset($_SESSION['sentiment_redirect'])) {
+    unset($_SESSION['sentiment_redirect']);
+    unset($_SESSION['ai_pre_prompt']);
+}
 ?>

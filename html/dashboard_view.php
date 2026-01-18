@@ -52,6 +52,61 @@
         </div>
     </div>
 
+    <?php if (isset($_SESSION['show_celebration']) && $_SESSION['show_celebration'] === true): ?>
+    <!-- Celebration Popup Modal for Positive Sentiment -->
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-popup" id="celebrationPopup">
+            <button class="close-celebration" id="closeCelebration" title="Close">×</button>
+            <div class="celebration-popup-content">
+                <div class="celebration-icon-large">🎉</div>
+                <h2 class="celebration-title">That's Wonderful!</h2>
+                <p class="celebration-message"><?php echo htmlspecialchars($_SESSION['celebration_message']); ?></p>
+                <div class="celebration-actions-popup">
+                    <button class="share-experience-btn" id="shareExperienceBtn">
+                        <span>📝</span> Share Your Experience
+                    </button>
+                    <button class="dismiss-celebration" id="dismissCelebration">
+                        Maybe Later
+                    </button>
+                </div>
+            </div>
+            <!-- Confetti animation elements -->
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+        </div>
+    </div>
+    <?php 
+        // Clear celebration flags after displaying (prevent re-showing on refresh)
+        unset($_SESSION['show_celebration']);
+        unset($_SESSION['celebration_message']);
+    ?>
+    <?php endif; ?>
+
+    <?php if (!empty($pending_goals)): ?>
+    <!-- Goals Reminder Widget -->
+    <div class="goals-reminder-widget fade-in-up">
+        <div class="reminder-icon">🎯</div>
+        <div class="reminder-content">
+            <h3>Your Active Goals</h3>
+            <p class="reminder-subtitle">Keep up the great work on your wellness journey!</p>
+            <ul class="goals-list">
+                <?php foreach ($pending_goals as $goal): ?>
+                    <li>
+                        <span class="goal-bullet">•</span>
+                        <?php echo htmlspecialchars($goal['goal_text']); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <a href="/wellness-tracker/php/goals.php" class="view-all-goals">
+                View All Goals <span>→</span>
+            </a>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <div class="container scale-in delay-200">
         
         <section class="tracking-form fade-in-up">
@@ -313,5 +368,6 @@
 </script>
 <script src="../js/animations.js"></script>
 <script src="../js/visual-utils.js"></script>
+<script src="../js/celebration.js"></script>
 </body>
 </html>
