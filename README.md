@@ -102,7 +102,8 @@ Wellness Tracker helps you **monitor your emotional health** by tracking daily m
 wellness-tracker/
 ├── index.php                    # Landing page with animations
 ├── config/
-│   └── ai_config.php            # Groq API configuration
+│   ├── ai_config.example.php    # Template for Groq API config (copy to ai_config.php)
+│   └── ai_config.php            # Your actual API keys (NOT in version control)
 ├── php/                         # Backend controllers
 │   ├── login.php               # Login handler
 │   ├── register.php            # Registration handler
@@ -173,17 +174,26 @@ define('DB_NAME', 'wellness_tracker');
 
 ### **4. Configure Groq API**
 
-Edit `config/ai_config.php`:
-```php
-define('GROQ_API_KEY', 'your_groq_api_key_here');  // Get from console.groq.com
-define('GROQ_MODEL', 'llama-3.1-8b-instant');
-```
+**⚠️ IMPORTANT:** The `ai_config.php` file is not included in the repository for security (it contains your API key).
+
+**Setup Steps:**
+1. Copy the example file:
+   ```bash
+   cp config/ai_config.example.php config/ai_config.php
+   ```
+
+2. Edit `config/ai_config.php` and add your API key:
+   ```php
+   define('GROQ_API_KEY', 'your_actual_groq_api_key_here');
+   ```
 
 **Get your FREE Groq API key:**
 1. Go to https://console.groq.com/keys
 2. Sign up (free, no credit card needed)
 3. Click "Create API Key"
 4. Copy the key and paste it in `config/ai_config.php`
+
+**Note:** Never commit `ai_config.php` to version control - it's already in `.gitignore`
 
 ### **5. Deploy Files**
 
